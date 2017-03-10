@@ -1,6 +1,6 @@
 float speed = 0;
 public static float x, y;
-
+PImage brick, play;
 ArrayList<Barrier> barriers;
 ArrayList<Barrier> toRemove;
 
@@ -14,12 +14,14 @@ void setup(){
   barriers = new ArrayList<Barrier>();
   toRemove = new ArrayList<Barrier>();
   
+  brick = loadImage("brick.png");
+  
   x = 0;
   y = 0;
   
   player = new Player(20);
   
-  barriers.add(new Barrier(50));
+  barriers.add(new Barrier(50, brick));
 }
 
 void draw(){
@@ -54,7 +56,7 @@ void updateBarriers(){
   }
   
   if(frameCount%90==0){
-    barriers.add(new Barrier(50));
+    barriers.add(new Barrier(50, brick));
     println("Adding barrier");
   }
   
@@ -66,14 +68,14 @@ void updateBarriers(){
 }
 
 void handleMovement(){
-  if(mousePressed){
-    if(mouseX<=width/2)
+  if(keyPressed){
+    if(keyCode==LEFT)
       speed = -7;
-    else
+    else if(keyCode==RIGHT)
       speed = 7;
     moving = true;
     
-  }if(!mousePressed && moving){
+  }if(!keyPressed && moving){
     moving = false;
     speed = 0;
   }
