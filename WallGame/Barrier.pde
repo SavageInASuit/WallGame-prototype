@@ -33,10 +33,10 @@ class Barrier{
   void show(){
     println("SHOWING");
     fill(255, 0, 0);
+    
+    imageMode(CORNER);
     drawWall(x1, y1, gapX + WallGame.x, h);
     drawWall(x2 + WallGame.x, y1, width-(gapX+WallGame.x), h);
-    //image(sprite, x1, y1, gapX + WallGame.x, h);
-    //image(sprite, x2 + WallGame.x, y1, width-(gapX+WallGame.x), h);
   }
   
   void drawWall(float x, float y, float side, float up){

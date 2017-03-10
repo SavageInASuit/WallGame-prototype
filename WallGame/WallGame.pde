@@ -1,4 +1,5 @@
-float speed = 0;
+float speed;
+int score;
 public static float x, y;
 PImage brick, play;
 ArrayList<Barrier> barriers;
@@ -15,13 +16,18 @@ void setup(){
   toRemove = new ArrayList<Barrier>();
   
   brick = loadImage("brick.png");
+  play = loadImage("color_circle.png");
   
   x = 0;
   y = 0;
+  speed = 0;
+  score = 0;
   
-  player = new Player(20);
+  player = new Player(20, play);
   
   barriers.add(new Barrier(50, brick));
+  textSize(20);
+  noStroke();
 }
 
 void draw(){
@@ -36,6 +42,13 @@ void draw(){
   }else{
     println("Colliding");
   }
+  
+  color c = color(200, 200, 200, 100);
+  
+  fill(c);
+  rect(20, 10, 120, 28);
+  fill(255);
+  text("score: " + score, 30, 30);
 }
 
 void showBarriers(){
@@ -62,6 +75,7 @@ void updateBarriers(){
   
   for(Barrier c : toRemove){
     barriers.remove(c);
+    score++;
   }
   
   toRemove.clear();
